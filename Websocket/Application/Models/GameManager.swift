@@ -36,7 +36,7 @@ final class GameManager {
     private func configureSockets() {
         socketManager.connect()
         
-        socketManager.on(event: .spaceshipDidConnect) { [weak self] (data) in
+        socketManager.on(event: .spaceshipDidConnect(playerId: "")) { [weak self] (data) in
             guard let newPlayerString = data[0] as? String, let newSpaceshipString = data[1] as? String else { return }
             guard let newPlayer = APIPlayer.fromJsonString(newPlayerString), let newSpaceship = APISpaceship.fromJsonString(newSpaceshipString) else { return }
             
@@ -48,8 +48,10 @@ final class GameManager {
             self?.handleSpaceshipDidConnect(newPlayer: newPlayer, newSpaceship: newSpaceship)
         }
         
-        socketManager.on(event: .spaceshipDidDisconnect(playerId: "")) { (data) in
-            
+        socketManager.on(event: .spaceshipDidDisconnect(playerId: "")) { [weak self] (data) in
+            guard let fetchedPlayerId = data[0] as? String else { return }
+            guard let apiSpaceship = self?.gameSummary.game.spaceships.first(where: { $0.player.id == fetchedPlayerId }) else { return }
+            self?.handleSpaceshipDidDisconnect(apiSpaceship: apiSpaceship)
         }
         
         socketManager.on(event: .spaceshipDidUpdatePosition(playerId: "", position: .zero, rotation: 0)) { [weak self] (data) in
@@ -98,6 +100,12 @@ extension GameManager {
     private func handleSpaceshipDidConnect(newPlayer: APIPlayer, newSpaceship: APISpaceship) {
         gameSummary.game.players.insert(newPlayer)
         delegate?.spaceshipDidConnect(apiSpaceship: newSpaceship, gameManager: self)
+    }
+    
+    private func handleSpaceshipDidDisconnect(apiSpaceship: APISpaceship) {
+        delegate?.spaceshipDidDisconnect(apiSpaceship: apiSpaceship, gameManager: self)
+        gameSummary.game.spaceships.remove(apiSpaceship)
+        gameSummary.game.players.remove(apiSpaceship.player)
     }
     
     private func handleSpaceshipDidUpdatePosition(apiSpaceship: APISpaceship, position: CGPoint, rotation: CGFloat) {

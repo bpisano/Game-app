@@ -35,6 +35,7 @@ final class GameCamera: SKCameraNode {
         
     private func addToScene(_ scene: SKScene) {
         scene.camera = self
+        scene.addChild(self)
     }
     
     func update() {

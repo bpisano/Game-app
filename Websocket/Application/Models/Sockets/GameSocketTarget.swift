@@ -11,7 +11,7 @@ import SocketIO
 
 enum GameSocketTarget {
     
-    case spaceshipDidConnect
+    case spaceshipDidConnect(playerId: String)
     case spaceshipDidDisconnect(playerId: String)
     case spaceshipDidUpdatePosition(playerId: String, position: CGPoint, rotation: CGFloat)
     case spaceshipDidFire(playerId: String)
@@ -47,8 +47,10 @@ extension GameSocketTarget: SocketTarget {
     
     var items: [SocketData] {
         switch self {
-        case .spaceshipDidConnect, .spaceshipHasBeenKilled, .spaceshipTimerBeforeRespawn, .spaceshipDidRespawn:
+        case .spaceshipHasBeenKilled, .spaceshipTimerBeforeRespawn, .spaceshipDidRespawn:
             return []
+        case .spaceshipDidConnect(playerId: let playerId):
+            return [playerId]
         case .spaceshipDidDisconnect(playerId: let playerId):
             return [playerId]
         case let .spaceshipDidUpdatePosition(playerId: playerId, position: position, rotation: rotation):

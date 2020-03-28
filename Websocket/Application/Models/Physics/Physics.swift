@@ -64,6 +64,7 @@ struct Physics {
             body.affectedByGravity = false
             body.allowsRotation = false
             body.usesPreciseCollisionDetection = true
+            body.linearDamping = 0.9
             body.categoryBitMask = BitMak.spaceship.category
             body.collisionBitMask = BitMak.spaceship.collisions
             body.contactTestBitMask = BitMak.spaceship.contact
