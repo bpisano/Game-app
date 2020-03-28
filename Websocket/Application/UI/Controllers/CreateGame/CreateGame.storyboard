@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="sIL-ST-roU">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Create Game View Controller-->
+        <scene sceneID="DzR-uK-6nR">
+            <objects>
+                <viewController id="sIL-ST-roU" customClass="CreateGameViewController" customModule="Websocket" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="OgC-Uy-xyh">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="339"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cx9-fL-HHp">
+                                <rect key="frame" x="159" y="20" width="132" height="21"/>
+                                <subviews>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="62J-yZ-x46">
+                                        <rect key="frame" x="-6" y="-7" width="120" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Create Game" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7lQ-mw-yRl">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="createGame:" target="sIL-ST-roU" id="CXy-l6-cwr"/>
+                                        </connections>
+                                    </button>
+                                    <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="MFS-MT-fgS">
+                                        <rect key="frame" x="116" y="3" width="16" height="16"/>
+                                    </progressIndicator>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                            <box title="Game identifier" translatesAutoresizingMaskIntoConstraints="NO" id="5V0-yL-0Br">
+                                <rect key="frame" x="17" y="57" width="416" height="114"/>
+                                <view key="contentView" id="iD8-x9-gFn">
+                                    <rect key="frame" x="3" y="3" width="410" height="96"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="X5B-jm-hEp">
+                                            <rect key="frame" x="18" y="39" width="374" height="19"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Label" id="clP-Fn-2rw">
+                                                <font key="font" metaFont="systemMedium" size="15"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="X5B-jm-hEp" firstAttribute="leading" secondItem="iD8-x9-gFn" secondAttribute="leading" constant="20" id="8Cb-hw-NcP"/>
+                                        <constraint firstItem="X5B-jm-hEp" firstAttribute="centerY" secondItem="iD8-x9-gFn" secondAttribute="centerY" id="Jyh-pY-hT6"/>
+                                        <constraint firstItem="X5B-jm-hEp" firstAttribute="centerX" secondItem="iD8-x9-gFn" secondAttribute="centerX" id="QhU-5m-McZ"/>
+                                    </constraints>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="Seg-Cq-6H9"/>
+                                </constraints>
+                            </box>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="j7g-zq-53J">
+                                <rect key="frame" x="166" y="296" width="119" height="23"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Create Game" id="0F0-RR-paU">
+                                    <font key="font" metaFont="system" size="20"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fGA-nq-X4q">
+                                <rect key="frame" x="85" y="211" width="280" height="45"/>
+                                <subviews>
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lVB-ip-Pyy">
+                                        <rect key="frame" x="40" y="24" width="200" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="uoM-oN-jws"/>
+                                        </constraints>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="left" placeholderString="Username" drawsBackground="YES" id="aLP-R1-IUI">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Btr-vq-obT">
+                                        <rect key="frame" x="-2" y="0.0" width="284" height="16"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Your username will be visible by other players." id="U1q-U6-UaF">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dyG-5j-LIt">
+                                <rect key="frame" x="14" y="13" width="82" height="32"/>
+                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3g2-vR-Jny">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="cancel:" target="sIL-ST-roU" id="m93-Qc-PAH"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="j7g-zq-53J" firstAttribute="top" secondItem="OgC-Uy-xyh" secondAttribute="top" constant="20" id="1I2-fY-ncg"/>
+                            <constraint firstItem="cx9-fL-HHp" firstAttribute="top" relation="greaterThanOrEqual" secondItem="5V0-yL-0Br" secondAttribute="bottom" constant="20" id="41P-uO-jlu"/>
+                            <constraint firstItem="j7g-zq-53J" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="OgC-Uy-xyh" secondAttribute="leading" constant="20" id="HCT-TN-DhS"/>
+                            <constraint firstItem="fGA-nq-X4q" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="OgC-Uy-xyh" secondAttribute="leading" constant="20" id="Hmt-HH-T9w"/>
+                            <constraint firstItem="5V0-yL-0Br" firstAttribute="top" secondItem="fGA-nq-X4q" secondAttribute="bottom" constant="40" id="RLk-TK-23A"/>
+                            <constraint firstItem="dyG-5j-LIt" firstAttribute="leading" secondItem="OgC-Uy-xyh" secondAttribute="leading" constant="20" id="aBQ-PC-m7S"/>
+                            <constraint firstItem="j7g-zq-53J" firstAttribute="centerX" secondItem="OgC-Uy-xyh" secondAttribute="centerX" id="dOL-Vw-sTP"/>
+                            <constraint firstAttribute="bottom" secondItem="cx9-fL-HHp" secondAttribute="bottom" constant="20" id="fLV-jx-FkA"/>
+                            <constraint firstItem="5V0-yL-0Br" firstAttribute="leading" secondItem="OgC-Uy-xyh" secondAttribute="leading" constant="20" id="hdi-2p-GYz"/>
+                            <constraint firstItem="cx9-fL-HHp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="dyG-5j-LIt" secondAttribute="trailing" constant="20" id="ipK-y3-kiz"/>
+                            <constraint firstItem="fGA-nq-X4q" firstAttribute="centerX" secondItem="OgC-Uy-xyh" secondAttribute="centerX" id="kWg-il-P80"/>
+                            <constraint firstItem="cx9-fL-HHp" firstAttribute="centerX" secondItem="OgC-Uy-xyh" secondAttribute="centerX" id="nKT-lR-r1d"/>
+                            <constraint firstItem="fGA-nq-X4q" firstAttribute="top" secondItem="j7g-zq-53J" secondAttribute="bottom" constant="40" id="pBR-H3-9i7"/>
+                            <constraint firstItem="5V0-yL-0Br" firstAttribute="centerX" secondItem="OgC-Uy-xyh" secondAttribute="centerX" id="tIw-gW-W5g"/>
+                            <constraint firstAttribute="bottom" secondItem="dyG-5j-LIt" secondAttribute="bottom" constant="20" id="uQn-jO-IKR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="MFS-MT-fgS" id="jA5-np-q95"/>
+                        <outlet property="cancelButton" destination="dyG-5j-LIt" id="vYC-9F-xLK"/>
+                        <outlet property="createGameButton" destination="62J-yZ-x46" id="3al-Xg-P5y"/>
+                        <outlet property="gameIdTextField" destination="X5B-jm-hEp" id="gAc-Xt-q9L"/>
+                        <outlet property="usernameTextField" destination="lVB-ip-Pyy" id="2gZ-m0-lRN"/>
+                    </connections>
+                </viewController>
+                <customObject id="1AF-Dl-plL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-113" y="140.5"/>
+        </scene>
+    </scenes>
+</document>

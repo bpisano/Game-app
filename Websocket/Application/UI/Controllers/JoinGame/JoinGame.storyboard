@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="d2V-Od-YOH">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Join Game View Controller-->
+        <scene sceneID="zhB-Ze-az7">
+            <objects>
+                <viewController id="d2V-Od-YOH" customClass="JoinGameViewController" customModule="Websocket" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="ZmE-dV-XFO">
+                        <rect key="frame" x="0.0" y="0.0" width="553" height="441"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yEe-EV-gzi">
+                                <rect key="frame" x="218" y="20" width="117" height="21"/>
+                                <subviews>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ACj-zc-gpr">
+                                        <rect key="frame" x="-6" y="-7" width="105" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Join Game" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uBy-Wc-eQs">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="joinGame:" target="d2V-Od-YOH" id="XH3-O8-ULr"/>
+                                        </connections>
+                                    </button>
+                                    <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="zfp-8E-Zlt">
+                                        <rect key="frame" x="101" y="3" width="16" height="16"/>
+                                    </progressIndicator>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                            <box title="Game identifier" translatesAutoresizingMaskIntoConstraints="NO" id="a1D-vR-4a8">
+                                <rect key="frame" x="17" y="159" width="519" height="114"/>
+                                <view key="contentView" id="EAo-vC-6A7">
+                                    <rect key="frame" x="3" y="3" width="513" height="96"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6WM-ev-34D">
+                                            <rect key="frame" x="20" y="38" width="473" height="21"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="center" placeholderString="Game identifier" drawsBackground="YES" id="0US-Sw-dVd">
+                                                <font key="font" usesAppearanceFont="YES"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="6WM-ev-34D" firstAttribute="centerX" secondItem="EAo-vC-6A7" secondAttribute="centerX" id="UoU-Xf-PIC"/>
+                                        <constraint firstItem="6WM-ev-34D" firstAttribute="leading" secondItem="EAo-vC-6A7" secondAttribute="leading" constant="20" id="faH-Mo-O0J"/>
+                                        <constraint firstItem="6WM-ev-34D" firstAttribute="centerY" secondItem="EAo-vC-6A7" secondAttribute="centerY" id="qPU-RV-tjs"/>
+                                    </constraints>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="eXg-nd-i0B"/>
+                                </constraints>
+                            </box>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8xh-lv-RZJ">
+                                <rect key="frame" x="228" y="398" width="97" height="23"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Join Game" id="hdl-TM-P6K">
+                                    <font key="font" metaFont="system" size="20"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MGe-c4-8vR">
+                                <rect key="frame" x="137" y="313" width="280" height="45"/>
+                                <subviews>
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0aJ-Rj-uVE">
+                                        <rect key="frame" x="40" y="24" width="200" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="neP-Pl-8dB"/>
+                                        </constraints>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="left" placeholderString="Username" drawsBackground="YES" id="VSH-fZ-S6T">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eXn-LV-KCM">
+                                        <rect key="frame" x="-2" y="0.0" width="284" height="16"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Your username will be visible by other players." id="vZR-Va-2tY">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="COK-8s-TlW">
+                                <rect key="frame" x="14" y="13" width="82" height="32"/>
+                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="AKR-T7-c3K">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="cancel:" target="d2V-Od-YOH" id="g33-Zq-yoN"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="a1D-vR-4a8" firstAttribute="centerX" secondItem="ZmE-dV-XFO" secondAttribute="centerX" id="2PU-9v-YQs"/>
+                            <constraint firstItem="COK-8s-TlW" firstAttribute="leading" secondItem="ZmE-dV-XFO" secondAttribute="leading" constant="20" id="7fu-h5-wWS"/>
+                            <constraint firstItem="8xh-lv-RZJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZmE-dV-XFO" secondAttribute="leading" constant="20" id="9p9-CQ-Xur"/>
+                            <constraint firstItem="yEe-EV-gzi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="COK-8s-TlW" secondAttribute="trailing" constant="20" id="9q4-2N-KNi"/>
+                            <constraint firstItem="yEe-EV-gzi" firstAttribute="top" relation="greaterThanOrEqual" secondItem="a1D-vR-4a8" secondAttribute="bottom" constant="20" id="CBa-NT-h5Z"/>
+                            <constraint firstItem="MGe-c4-8vR" firstAttribute="centerX" secondItem="ZmE-dV-XFO" secondAttribute="centerX" id="DsI-LA-G8h"/>
+                            <constraint firstItem="MGe-c4-8vR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZmE-dV-XFO" secondAttribute="leading" constant="20" id="EyT-1m-gBG"/>
+                            <constraint firstItem="MGe-c4-8vR" firstAttribute="top" secondItem="8xh-lv-RZJ" secondAttribute="bottom" constant="40" id="GDV-aw-fBV"/>
+                            <constraint firstItem="8xh-lv-RZJ" firstAttribute="top" secondItem="ZmE-dV-XFO" secondAttribute="top" constant="20" id="Huk-O3-6vf"/>
+                            <constraint firstAttribute="bottom" secondItem="COK-8s-TlW" secondAttribute="bottom" constant="20" id="N9S-aa-4vc"/>
+                            <constraint firstItem="a1D-vR-4a8" firstAttribute="top" secondItem="MGe-c4-8vR" secondAttribute="bottom" constant="40" id="iCK-mq-wBM"/>
+                            <constraint firstItem="a1D-vR-4a8" firstAttribute="leading" secondItem="ZmE-dV-XFO" secondAttribute="leading" constant="20" id="o8z-az-AxN"/>
+                            <constraint firstItem="8xh-lv-RZJ" firstAttribute="centerX" secondItem="ZmE-dV-XFO" secondAttribute="centerX" id="uUO-WJ-IPt"/>
+                            <constraint firstAttribute="bottom" secondItem="yEe-EV-gzi" secondAttribute="bottom" constant="20" id="wIh-pp-FL6"/>
+                            <constraint firstItem="yEe-EV-gzi" firstAttribute="centerX" secondItem="ZmE-dV-XFO" secondAttribute="centerX" id="xL0-E8-PQh"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="zfp-8E-Zlt" id="bBM-ae-BIo"/>
+                        <outlet property="cancelButton" destination="COK-8s-TlW" id="IOl-tY-Ztu"/>
+                        <outlet property="gameIdTextField" destination="6WM-ev-34D" id="4FQ-St-8Yn"/>
+                        <outlet property="joinGameButton" destination="ACj-zc-gpr" id="urP-NY-iOA"/>
+                        <outlet property="usernameTextField" destination="0aJ-Rj-uVE" id="hEW-L1-g2L"/>
+                    </connections>
+                </viewController>
+                <customObject id="fWc-hf-JPu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="339.5" y="-69.5"/>
+        </scene>
+    </scenes>
+</document>

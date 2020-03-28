@@ -3,30 +3,74 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		506850CC242385EF007C8609 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 506850CB242385EF007C8609 /* Moya */; };
+		506850CE24238600007C8609 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506850CD24238600007C8609 /* WebService.swift */; };
+		506850D124238943007C8609 /* DataState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506850D024238943007C8609 /* DataState.swift */; };
+		506850D42423BEFA007C8609 /* APIPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506850D32423BEFA007C8609 /* APIPlayer.swift */; };
+		506850DA2423CF34007C8609 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 506850D92423CF34007C8609 /* SocketIO */; };
+		506850DC2423F7A1007C8609 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506850DB2423F7A1007C8609 /* GameManager.swift */; };
+		506850DF2423FF3B007C8609 /* APIGameSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506850DE2423FF3B007C8609 /* APIGameSummary.swift */; };
+		507509FA2427843F00A566B6 /* APISpaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507509F92427843F00A566B6 /* APISpaceship.swift */; };
+		507509FC242785C900A566B6 /* APIGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507509FB242785C900A566B6 /* APIGame.swift */; };
+		507509FE2427938300A566B6 /* GameSocketManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507509FD2427938300A566B6 /* GameSocketManger.swift */; };
+		50750A012427945100A566B6 /* SocketTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50750A002427945100A566B6 /* SocketTarget.swift */; };
+		50750A03242799FF00A566B6 /* GameSocketTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50750A02242799FF00A566B6 /* GameSocketTarget.swift */; };
+		50774B742424B99D00B81447 /* SpaceshipNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50774B732424B99D00B81447 /* SpaceshipNode.swift */; };
+		50774B762424BB9E00B81447 /* BackgroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50774B752424BB9E00B81447 /* BackgroundNode.swift */; };
+		50774B782424C9ED00B81447 /* GameCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50774B772424C9ED00B81447 /* GameCamera.swift */; };
+		50774B7B2424DE4100B81447 /* Physics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50774B7A2424DE4100B81447 /* Physics.swift */; };
+		50774B812425060B00B81447 /* JoinGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50774B7F2425060B00B81447 /* JoinGameViewController.swift */; };
+		50774B842425061E00B81447 /* JoinGame.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50774B832425061E00B81447 /* JoinGame.storyboard */; };
+		50774B862425270C00B81447 /* FireNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50774B852425270C00B81447 /* FireNode.swift */; };
 		50B4DE362422722900E4D3D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B4DE352422722900E4D3D8 /* AppDelegate.swift */; };
-		50B4DE382422722900E4D3D8 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 50B4DE372422722900E4D3D8 /* GameScene.sks */; };
-		50B4DE3A2422722900E4D3D8 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 50B4DE392422722900E4D3D8 /* Actions.sks */; };
 		50B4DE3C2422722900E4D3D8 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B4DE3B2422722900E4D3D8 /* GameScene.swift */; };
-		50B4DE3E2422722900E4D3D8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B4DE3D2422722900E4D3D8 /* ViewController.swift */; };
+		50B4DE3E2422722900E4D3D8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B4DE3D2422722900E4D3D8 /* MainViewController.swift */; };
 		50B4DE402422722A00E4D3D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50B4DE3F2422722A00E4D3D8 /* Assets.xcassets */; };
 		50B4DE432422722A00E4D3D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50B4DE412422722A00E4D3D8 /* Main.storyboard */; };
+		50B4DE5A2422A66A00E4D3D8 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B4DE592422A66A00E4D3D8 /* MenuScene.swift */; };
+		50B4DE5C2422A8D400E4D3D8 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B4DE5B2422A8D400E4D3D8 /* ButtonNode.swift */; };
+		50B4DE662422C32F00E4D3D8 /* CreateGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B4DE652422C32F00E4D3D8 /* CreateGameViewController.swift */; };
+		50B4DE6A2422C35D00E4D3D8 /* CreateGame.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50B4DE692422C35D00E4D3D8 /* CreateGame.storyboard */; };
+		50DCF421242F9F2600355957 /* GameManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DCF420242F9F2600355957 /* GameManagerDelegate.swift */; };
+		50DCF423242FB82F00355957 /* RespawnTimerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DCF422242FB82F00355957 /* RespawnTimerNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		506850CD24238600007C8609 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		506850D024238943007C8609 /* DataState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataState.swift; sourceTree = "<group>"; };
+		506850D32423BEFA007C8609 /* APIPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIPlayer.swift; sourceTree = "<group>"; };
+		506850DB2423F7A1007C8609 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
+		506850DE2423FF3B007C8609 /* APIGameSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIGameSummary.swift; sourceTree = "<group>"; };
+		507509F92427843F00A566B6 /* APISpaceship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISpaceship.swift; sourceTree = "<group>"; };
+		507509FB242785C900A566B6 /* APIGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIGame.swift; sourceTree = "<group>"; };
+		507509FD2427938300A566B6 /* GameSocketManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSocketManger.swift; sourceTree = "<group>"; };
+		50750A002427945100A566B6 /* SocketTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketTarget.swift; sourceTree = "<group>"; };
+		50750A02242799FF00A566B6 /* GameSocketTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSocketTarget.swift; sourceTree = "<group>"; };
+		50774B732424B99D00B81447 /* SpaceshipNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceshipNode.swift; sourceTree = "<group>"; };
+		50774B752424BB9E00B81447 /* BackgroundNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundNode.swift; sourceTree = "<group>"; };
+		50774B772424C9ED00B81447 /* GameCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCamera.swift; sourceTree = "<group>"; };
+		50774B7A2424DE4100B81447 /* Physics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Physics.swift; sourceTree = "<group>"; };
+		50774B7F2425060B00B81447 /* JoinGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGameViewController.swift; sourceTree = "<group>"; };
+		50774B832425061E00B81447 /* JoinGame.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JoinGame.storyboard; sourceTree = "<group>"; };
+		50774B852425270C00B81447 /* FireNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireNode.swift; sourceTree = "<group>"; };
 		50B4DE322422722900E4D3D8 /* Websocket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Websocket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50B4DE352422722900E4D3D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		50B4DE372422722900E4D3D8 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		50B4DE392422722900E4D3D8 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		50B4DE3B2422722900E4D3D8 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		50B4DE3D2422722900E4D3D8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		50B4DE3D2422722900E4D3D8 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		50B4DE3F2422722A00E4D3D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		50B4DE422422722A00E4D3D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		50B4DE442422722A00E4D3D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50B4DE452422722A00E4D3D8 /* Websocket.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Websocket.entitlements; sourceTree = "<group>"; };
+		50B4DE592422A66A00E4D3D8 /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
+		50B4DE5B2422A8D400E4D3D8 /* ButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
+		50B4DE652422C32F00E4D3D8 /* CreateGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGameViewController.swift; sourceTree = "<group>"; };
+		50B4DE692422C35D00E4D3D8 /* CreateGame.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateGame.storyboard; sourceTree = "<group>"; };
+		50DCF420242F9F2600355957 /* GameManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManagerDelegate.swift; sourceTree = "<group>"; };
+		50DCF422242FB82F00355957 /* RespawnTimerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RespawnTimerNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,12 +78,91 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				506850CC242385EF007C8609 /* Moya in Frameworks */,
+				506850DA2423CF34007C8609 /* SocketIO in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		506850C9242384E4007C8609 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				506850CD24238600007C8609 /* WebService.swift */,
+				506850D22423BEF2007C8609 /* Models */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		506850CF24238936007C8609 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				506850D024238943007C8609 /* DataState.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		506850D22423BEF2007C8609 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				506850DE2423FF3B007C8609 /* APIGameSummary.swift */,
+				507509FB242785C900A566B6 /* APIGame.swift */,
+				506850D32423BEFA007C8609 /* APIPlayer.swift */,
+				507509F92427843F00A566B6 /* APISpaceship.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		506850D72423BF36007C8609 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				50DCF41D242F9EA500355957 /* Shared */,
+				50DCF41C242F9EA100355957 /* Game */,
+				50DCF41B242F9E9C00355957 /* Menu */,
+				50B4DE5F2422AE3700E4D3D8 /* Controllers */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		506850DD2423F7A8007C8609 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				506850DB2423F7A1007C8609 /* GameManager.swift */,
+				50DCF420242F9F2600355957 /* GameManagerDelegate.swift */,
+				50774B792424DE3300B81447 /* Physics */,
+				507509FF2427944200A566B6 /* Sockets */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		507509FF2427944200A566B6 /* Sockets */ = {
+			isa = PBXGroup;
+			children = (
+				507509FD2427938300A566B6 /* GameSocketManger.swift */,
+				50750A002427945100A566B6 /* SocketTarget.swift */,
+				50750A02242799FF00A566B6 /* GameSocketTarget.swift */,
+			);
+			path = Sockets;
+			sourceTree = "<group>";
+		};
+		50774B792424DE3300B81447 /* Physics */ = {
+			isa = PBXGroup;
+			children = (
+				50774B7A2424DE4100B81447 /* Physics.swift */,
+			);
+			path = Physics;
+			sourceTree = "<group>";
+		};
+		50774B7E242505F200B81447 /* JoinGame */ = {
+			isa = PBXGroup;
+			children = (
+				50774B7F2425060B00B81447 /* JoinGameViewController.swift */,
+				50774B832425061E00B81447 /* JoinGame.storyboard */,
+			);
+			path = JoinGame;
+			sourceTree = "<group>";
+		};
 		50B4DE292422722900E4D3D8 = {
 			isa = PBXGroup;
 			children = (
@@ -60,16 +183,96 @@
 			isa = PBXGroup;
 			children = (
 				50B4DE352422722900E4D3D8 /* AppDelegate.swift */,
-				50B4DE372422722900E4D3D8 /* GameScene.sks */,
-				50B4DE392422722900E4D3D8 /* Actions.sks */,
-				50B4DE3B2422722900E4D3D8 /* GameScene.swift */,
-				50B4DE3D2422722900E4D3D8 /* ViewController.swift */,
+				50B4DE5D2422AE1E00E4D3D8 /* Application */,
+				506850C9242384E4007C8609 /* API */,
+				506850CF24238936007C8609 /* Utils */,
 				50B4DE3F2422722A00E4D3D8 /* Assets.xcassets */,
-				50B4DE412422722A00E4D3D8 /* Main.storyboard */,
 				50B4DE442422722A00E4D3D8 /* Info.plist */,
 				50B4DE452422722A00E4D3D8 /* Websocket.entitlements */,
 			);
 			path = Websocket;
+			sourceTree = "<group>";
+		};
+		50B4DE5D2422AE1E00E4D3D8 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				506850D72423BF36007C8609 /* UI */,
+				506850DD2423F7A8007C8609 /* Models */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		50B4DE5F2422AE3700E4D3D8 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				50774B7E242505F200B81447 /* JoinGame */,
+				50B4DE642422BFFA00E4D3D8 /* CreateGame */,
+				50B4DE632422BFF600E4D3D8 /* Main */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		50B4DE632422BFF600E4D3D8 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				50B4DE3D2422722900E4D3D8 /* MainViewController.swift */,
+				50B4DE412422722A00E4D3D8 /* Main.storyboard */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		50B4DE642422BFFA00E4D3D8 /* CreateGame */ = {
+			isa = PBXGroup;
+			children = (
+				50B4DE652422C32F00E4D3D8 /* CreateGameViewController.swift */,
+				50B4DE692422C35D00E4D3D8 /* CreateGame.storyboard */,
+			);
+			path = CreateGame;
+			sourceTree = "<group>";
+		};
+		50DCF41B242F9E9C00355957 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				50B4DE592422A66A00E4D3D8 /* MenuScene.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		50DCF41C242F9EA100355957 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				50B4DE3B2422722900E4D3D8 /* GameScene.swift */,
+				50DCF41F242F9EE100355957 /* Camera */,
+				50DCF41E242F9EB600355957 /* Nodes */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		50DCF41D242F9EA500355957 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				50B4DE5B2422A8D400E4D3D8 /* ButtonNode.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		50DCF41E242F9EB600355957 /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				50774B752424BB9E00B81447 /* BackgroundNode.swift */,
+				50774B852425270C00B81447 /* FireNode.swift */,
+				50774B732424B99D00B81447 /* SpaceshipNode.swift */,
+				50DCF422242FB82F00355957 /* RespawnTimerNode.swift */,
+			);
+			path = Nodes;
+			sourceTree = "<group>";
+		};
+		50DCF41F242F9EE100355957 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				50774B772424C9ED00B81447 /* GameCamera.swift */,
+			);
+			path = Camera;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -88,6 +291,10 @@
 			dependencies = (
 			);
 			name = Websocket;
+			packageProductDependencies = (
+				506850CB242385EF007C8609 /* Moya */,
+				506850D92423CF34007C8609 /* SocketIO */,
+			);
 			productName = Websocket;
 			productReference = 50B4DE322422722900E4D3D8 /* Websocket.app */;
 			productType = "com.apple.product-type.application";
@@ -116,6 +323,10 @@
 				Base,
 			);
 			mainGroup = 50B4DE292422722900E4D3D8;
+			packageReferences = (
+				506850CA242385EF007C8609 /* XCRemoteSwiftPackageReference "Moya" */,
+				506850D82423CF34007C8609 /* XCRemoteSwiftPackageReference "socket" */,
+			);
 			productRefGroup = 50B4DE332422722900E4D3D8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -130,9 +341,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50B4DE382422722900E4D3D8 /* GameScene.sks in Resources */,
+				50774B842425061E00B81447 /* JoinGame.storyboard in Resources */,
 				50B4DE402422722A00E4D3D8 /* Assets.xcassets in Resources */,
-				50B4DE3A2422722900E4D3D8 /* Actions.sks in Resources */,
+				50B4DE6A2422C35D00E4D3D8 /* CreateGame.storyboard in Resources */,
 				50B4DE432422722A00E4D3D8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -144,9 +355,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50B4DE3E2422722900E4D3D8 /* ViewController.swift in Sources */,
+				506850DF2423FF3B007C8609 /* APIGameSummary.swift in Sources */,
+				50B4DE662422C32F00E4D3D8 /* CreateGameViewController.swift in Sources */,
+				50774B812425060B00B81447 /* JoinGameViewController.swift in Sources */,
+				50774B762424BB9E00B81447 /* BackgroundNode.swift in Sources */,
+				507509FA2427843F00A566B6 /* APISpaceship.swift in Sources */,
+				50774B862425270C00B81447 /* FireNode.swift in Sources */,
+				50750A012427945100A566B6 /* SocketTarget.swift in Sources */,
+				50DCF421242F9F2600355957 /* GameManagerDelegate.swift in Sources */,
+				50DCF423242FB82F00355957 /* RespawnTimerNode.swift in Sources */,
+				50B4DE3E2422722900E4D3D8 /* MainViewController.swift in Sources */,
+				506850DC2423F7A1007C8609 /* GameManager.swift in Sources */,
+				506850CE24238600007C8609 /* WebService.swift in Sources */,
+				50774B742424B99D00B81447 /* SpaceshipNode.swift in Sources */,
+				50B4DE5A2422A66A00E4D3D8 /* MenuScene.swift in Sources */,
 				50B4DE3C2422722900E4D3D8 /* GameScene.swift in Sources */,
+				50750A03242799FF00A566B6 /* GameSocketTarget.swift in Sources */,
+				506850D124238943007C8609 /* DataState.swift in Sources */,
+				50774B7B2424DE4100B81447 /* Physics.swift in Sources */,
+				507509FC242785C900A566B6 /* APIGame.swift in Sources */,
+				50774B782424C9ED00B81447 /* GameCamera.swift in Sources */,
+				507509FE2427938300A566B6 /* GameSocketManger.swift in Sources */,
 				50B4DE362422722900E4D3D8 /* AppDelegate.swift in Sources */,
+				506850D42423BEFA007C8609 /* APIPlayer.swift in Sources */,
+				50B4DE5C2422A8D400E4D3D8 /* ButtonNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +571,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		506850CA242385EF007C8609 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 14.0.0;
+			};
+		};
+		506850D82423CF34007C8609 /* XCRemoteSwiftPackageReference "socket" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		506850CB242385EF007C8609 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 506850CA242385EF007C8609 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+		506850D92423CF34007C8609 /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 506850D82423CF34007C8609 /* XCRemoteSwiftPackageReference "socket" */;
+			productName = SocketIO;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 50B4DE2A2422722900E4D3D8 /* Project object */;
 }
