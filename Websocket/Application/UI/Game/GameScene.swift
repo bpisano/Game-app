@@ -84,6 +84,16 @@ final class GameScene: SKScene {
     
 }
 
+// MARK: - Public Methods
+
+extension GameScene {
+    
+    func windowWillClose() {
+        gameManager.stopGame()
+    }
+    
+}
+
 
 // MARK: - GameManager event handler
 extension GameScene {

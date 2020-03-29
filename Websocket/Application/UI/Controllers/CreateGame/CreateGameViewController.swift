@@ -17,19 +17,21 @@ final class CreateGameViewController: NSViewController {
     @IBOutlet private weak var activityIndicator: NSProgressIndicator!
     @IBOutlet private weak var createGameButton: NSButton!
     @IBOutlet private weak var cancelButton: NSButton!
-    
+
     private var gameId: String!
     private var playerId: String!
     private var playerUsername: String!
+    private var didDismiss: ((_ controller: NSViewController) -> Void)?
     private var didCreateGame: ((_ gameSummary: APIGameSummary) -> Void)?
-    
+
     @Published private var state: DataState = .noData
     private var cancellablePublishers: [AnyCancellable] = []
     
-    class func controller(onCreateGame: @escaping (_ gameSummary: APIGameSummary) -> Void) -> CreateGameViewController {
+    class func controller(onDismiss: @escaping (_ controller: NSViewController) -> Void, onCreateGame: @escaping (_ gameSummary: APIGameSummary) -> Void) -> CreateGameViewController {
         let controller: CreateGameViewController = NSStoryboard(name: NSStoryboard.Name("CreateGame"), bundle: nil).instantiateInitialController() as! CreateGameViewController
         controller.gameId = UUID().uuidString
         controller.playerId = UUID().uuidString
+        controller.didDismiss = onDismiss
         controller.didCreateGame = onCreateGame
         return controller
     }
@@ -39,26 +41,26 @@ final class CreateGameViewController: NSViewController {
         configureUI()
         observeFieldValidation()
     }
-    
-    // MARK: - Field Validation
-    
-    private func observeFieldValidation() {
-        $state
-            .receive(on: DispatchQueue.main)
-            .sink { (receivedState) in
-                self.updateState(receivedState)
-            }
-            .store(in: &cancellablePublishers)
-    }
-    
+
     private func configureUI() {
         gameIdTextField.stringValue = gameId
         gameIdTextField.isSelectable = true
         usernameTextField.delegate = self
-        
+
         updateState(state)
     }
-    
+
+    // MARK: - Field Validation
+
+    private func observeFieldValidation() {
+        $state
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] (receivedState) in
+                self?.updateState(receivedState)
+            }
+            .store(in: &cancellablePublishers)
+    }
+
     private func updateState(_ state: DataState) {
         switch state {
         case .data, .error:
@@ -84,16 +86,16 @@ final class CreateGameViewController: NSViewController {
             activityIndicator.startAnimation(self)
         }
     }
-    
+
     // MARK: - Action
-    
-    @IBAction func cancel(_ sender: Any) {
-        dismiss(self)
+
+    @IBAction private func cancel(_ sender: Any) {
+        didDismiss?(self)
     }
-    
-    @IBAction func createGame(_ sender: Any) {
+
+    @IBAction private func createGame(_ sender: Any) {
         state = .loading
-        
+
         let provider: MoyaProvider<WebService> = MoyaProvider()
         provider.request(.createGame(id: gameId, playerId: playerId, playerUsername: playerUsername)) { [weak self] (result) in
             switch result {
@@ -105,35 +107,35 @@ final class CreateGameViewController: NSViewController {
             }
         }
     }
-    
+
     private func handleResponse(_ response: Response) {
         guard let json = try? response.mapJSON() else { return }
-        
+
         do {
             let gameSummary = try JSONDecoder().decode(APIGameSummary.self, from: response.data)
             didCreateGame?(gameSummary)
-            dismiss(self)
+            didDismiss?(self)
         } catch {
             print(error.localizedDescription)
             print(json)
         }
     }
-    
+
 }
 
 extension CreateGameViewController: NSTextFieldDelegate {
-    
+
     func controlTextDidChange(_ obj: Notification) {
         guard let textField = obj.object as? NSTextField else { return }
-        
+
         guard textField.stringValue.count > 3 else {
             playerUsername = ""
             state = .noData
             return
         }
-        
+
         playerUsername = textField.stringValue
         state = .data
     }
-    
+
 }

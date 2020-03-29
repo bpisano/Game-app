@@ -7,12 +7,14 @@
 //
 
 import Cocoa
+import Combine
 import SpriteKit
 import SocketIO
 
 final class GameManager {
         
     private let socketManager: GameSocketManger<GameSocketTarget>
+    private var cancellableSubscribers: [AnyCancellable] = []
     
     var gameSummary: APIGameSummary
     var delegate: GameManagerDelegate?
@@ -21,10 +23,15 @@ final class GameManager {
         self.gameSummary = gameSummary
         self.socketManager = GameSocketManger(url: URL(string: "http://localhost:3000")!, room: gameSummary.game.id)
     }
-    
+        
     func launchGame() {
         configureSpaceships()
         configureSockets()
+    }
+    
+    func stopGame() {
+        socketManager.emit(event: .spaceshipDidDisconnect(playerId: gameSummary.currentPlayer.id))
+        socketManager.disconnect()
     }
     
     private func configureSpaceships() {

@@ -12,8 +12,8 @@ final class GameCamera: SKCameraNode {
     
     static private let initialScale: CGFloat = 2
         
-    var nodeToFollow: SKSpriteNode?
-    var alertNode: SKSpriteNode? {
+    weak var nodeToFollow: SKSpriteNode?
+    weak var alertNode: SKSpriteNode? {
         willSet {
             guard let alertNode = alertNode else { return }
             alertNode.removeFromParent()

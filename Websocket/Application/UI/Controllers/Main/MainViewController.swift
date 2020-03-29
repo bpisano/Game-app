@@ -11,12 +11,8 @@ import SpriteKit
 import GameplayKit
 import SocketIO
 
-class MainViewController: NSViewController {
-
-    @IBOutlet private weak var skView: SKView!
-    
-    private var menuScene: MenuScene!
-    
+final class MainViewController: NSViewController {
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         presentMenuScene()
@@ -24,13 +20,16 @@ class MainViewController: NSViewController {
     
     override func viewDidAppear() {
         super.viewDidAppear()
+        
+        view.window?.delegate = self
+        
         configureMouseEvents()
     }
     
     private func presentMenuScene() {
         guard let view = view as? SKView else { fatalError() }
         
-        menuScene = MenuScene(onJoinGameTouch: { [weak self] in
+        let menuScene = MenuScene(onJoinGameTouch: { [weak self] in
             self?.showJoinGameController()
         }, onCreateGameTouch: { [weak self] in
             self?.showCreateGameController()
@@ -44,6 +43,14 @@ class MainViewController: NSViewController {
         view.presentScene(menuScene)
     }
     
+    private func goToGameScene(gameSummary: APIGameSummary) {
+        guard let view = view as? SKView else { return }
+        let gameManager: GameManager = GameManager(gameSummary: gameSummary)
+        let gameScene: GameScene = GameScene(gameManager: gameManager)
+        let transition: SKTransition = SKTransition.fade(with: .black, duration: 2)
+        view.presentScene(gameScene, transition: transition)
+    }
+    
     private func configureMouseEvents() {
         guard let view = view as? SKView else { fatalError() }
         
@@ -52,17 +59,30 @@ class MainViewController: NSViewController {
     }
         
     private func showCreateGameController() {
-        let controller: CreateGameViewController = CreateGameViewController.controller { [weak self] (gameSummary) in
-            self?.menuScene.goToGameScene(gameSummary: gameSummary)
-        }
+        let controller: CreateGameViewController = CreateGameViewController.controller(onDismiss: { [weak self] controller in
+            self?.dismiss(controller)
+        }, onCreateGame: { [weak self] (gameSummary) in
+            self?.goToGameScene(gameSummary: gameSummary)
+        })
         presentAsSheet(controller)
     }
     
     private func showJoinGameController() {
-        let controller: JoinGameViewController = JoinGameViewController.controller { [weak self] (gameSummary) in
-            self?.menuScene.goToGameScene(gameSummary: gameSummary)
-        }
+        let controller: JoinGameViewController = JoinGameViewController.controller(onDismiss: { [weak self] controller in
+            self?.dismiss(controller)
+        }, onJoinGame: { [weak self] (gameSummary) in
+            self?.goToGameScene(gameSummary: gameSummary)
+        })
         presentAsSheet(controller)
+    }
+    
+}
+
+extension MainViewController: NSWindowDelegate {
+    
+    func windowWillClose(_ notification: Notification) {
+        guard let gameScene = (view as? SKView)?.scene as? GameScene else { return }
+        gameScene.windowWillClose()
     }
     
 }

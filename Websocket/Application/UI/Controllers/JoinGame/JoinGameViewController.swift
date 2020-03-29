@@ -21,14 +21,16 @@ final class JoinGameViewController: NSViewController {
     private var gameId: String = ""
     private var playerId: String!
     private var playerUsername: String = ""
+    private var didDismiss: ((_ controller: NSViewController) -> Void)?
     private var didJoinGame: ((_ gameSummary: APIGameSummary) -> Void)?
     
     @Published private var state: DataState = .noData
     private var cancellablePublishers: [AnyCancellable] = []
 
-    class func controller(onJoinGame: @escaping (_ gameSummary: APIGameSummary) -> Void) -> JoinGameViewController {
+    class func controller(onDismiss: ((_ controller: NSViewController) -> Void)?, onJoinGame: @escaping (_ gameSummary: APIGameSummary) -> Void) -> JoinGameViewController {
         let controller: JoinGameViewController = NSStoryboard(name: NSStoryboard.Name("JoinGame"), bundle: nil).instantiateInitialController() as! JoinGameViewController
         controller.playerId = UUID().uuidString
+        controller.didDismiss = onDismiss
         controller.didJoinGame = onJoinGame
         return controller
     }
@@ -44,8 +46,8 @@ final class JoinGameViewController: NSViewController {
     private func observeFieldValidation() {
         $state
             .receive(on: DispatchQueue.main)
-            .sink { (receivedState) in
-                self.updateState(receivedState)
+            .sink { [weak self] (receivedState) in
+                self?.updateState(receivedState)
             }
             .store(in: &cancellablePublishers)
     }
@@ -84,7 +86,7 @@ final class JoinGameViewController: NSViewController {
     }
     
     @IBAction func cancel(_ sender: Any) {
-        dismiss(self)
+        didDismiss?(self)
     }
     
     @IBAction func joinGame(_ sender: Any) {
@@ -108,7 +110,7 @@ final class JoinGameViewController: NSViewController {
         do {
             let gameSummary = try JSONDecoder().decode(APIGameSummary.self, from: response.data)
             didJoinGame?(gameSummary)
-            dismiss(self)
+            didDismiss?(self)
         } catch {
             print(error.localizedDescription)
             print(json)
