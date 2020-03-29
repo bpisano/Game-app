@@ -11,24 +11,33 @@ import SocketIO
 
 final class GameSocketManger<T: SocketTarget> {
 
-    private let socketManager: SocketManager
-    private let roomSocket: SocketIOClient
+    private var socketManager: SocketManager?
+    private var roomSocket: SocketIOClient?
     
     init(url: URL, room: String) {
-        self.socketManager = SocketManager(socketURL: url, config: [.compress])
-        self.roomSocket = socketManager.socket(forNamespace: "/\(room)")
+        self.socketManager = SocketManager(socketURL: url, config: [.compress, .reconnects(false)])
+        self.roomSocket = socketManager?.socket(forNamespace: "/\(room)")
     }
     
     func connect() {
-        roomSocket.connect()
+        roomSocket?.connect()
+    }
+    
+    func disconnect() {
+        if let roomSocket = roomSocket {
+            socketManager?.removeSocket(roomSocket)
+        }
+        socketManager?.disconnect()
+        socketManager = nil
+        roomSocket = nil
     }
     
     func emit(event: T) {
-        roomSocket.emit(event.name, event.items)
+        roomSocket?.emit(event.name, event.items)
     }
     
     func on(event: T, _ completion: @escaping (_ data: [Any]) -> Void) {
-        roomSocket.on(event.name) { (data, _) in
+        roomSocket?.on(event.name) { (data, _) in
             completion(data)
         }
     }

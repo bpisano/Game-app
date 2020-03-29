@@ -11,12 +11,10 @@ import SpriteKit
 import GameplayKit
 import SocketIO
 
-class MainViewController: NSViewController {
-
+final class MainViewController: NSViewController {
+    
     @IBOutlet private weak var skView: SKView!
-    
-    private var menuScene: MenuScene!
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         presentMenuScene()
@@ -24,45 +22,64 @@ class MainViewController: NSViewController {
     
     override func viewDidAppear() {
         super.viewDidAppear()
+        
+        view.window?.delegate = self
+        
         configureMouseEvents()
     }
     
     private func presentMenuScene() {
-        guard let view = view as? SKView else { fatalError() }
-        
-        menuScene = MenuScene(onJoinGameTouch: { [weak self] in
+        let menuScene = MenuScene(onJoinGameTouch: { [weak self] in
             self?.showJoinGameController()
         }, onCreateGameTouch: { [weak self] in
             self?.showCreateGameController()
         })
         
-        view.ignoresSiblingOrder = true
-        view.showsFPS = true
-        view.showsNodeCount = true
-        view.showsPhysics = true
+        skView.ignoresSiblingOrder = true
+        skView.showsFPS = true
+        skView.showsNodeCount = true
+        skView.showsPhysics = true
         
-        view.presentScene(menuScene)
+        skView.presentScene(menuScene)
+    }
+    
+    private func goToGameScene(gameSummary: APIGameSummary) {
+        let gameManager: GameManager = GameManager(gameSummary: gameSummary)
+        let gameScene: GameScene = GameScene(gameManager: gameManager)
+        let transition: SKTransition = SKTransition.fade(with: .black, duration: 2)
+        skView.presentScene(gameScene, transition: transition)
     }
     
     private func configureMouseEvents() {
-        guard let view = view as? SKView else { fatalError() }
-        
-        view.window?.acceptsMouseMovedEvents = true
-        view.window?.makeFirstResponder(view.scene)
+        skView.window?.acceptsMouseMovedEvents = true
+        skView.window?.makeFirstResponder(skView.scene)
     }
         
     private func showCreateGameController() {
-        let controller: CreateGameViewController = CreateGameViewController.controller { [weak self] (gameSummary) in
-            self?.menuScene.goToGameScene(gameSummary: gameSummary)
-        }
+        let controller: CreateGameViewController = CreateGameViewController.controller(onDismiss: { [weak self] controller in
+            self?.dismiss(controller)
+        }, onCreateGame: { [weak self] (gameSummary) in
+            self?.goToGameScene(gameSummary: gameSummary)
+        })
         presentAsSheet(controller)
     }
     
     private func showJoinGameController() {
-        let controller: JoinGameViewController = JoinGameViewController.controller { [weak self] (gameSummary) in
-            self?.menuScene.goToGameScene(gameSummary: gameSummary)
-        }
+        let controller: JoinGameViewController = JoinGameViewController.controller(onDismiss: { [weak self] controller in
+            self?.dismiss(controller)
+        }, onJoinGame: { [weak self] (gameSummary) in
+            self?.goToGameScene(gameSummary: gameSummary)
+        })
         presentAsSheet(controller)
+    }
+    
+}
+
+extension MainViewController: NSWindowDelegate {
+    
+    func windowWillClose(_ notification: Notification) {
+        guard let gameScene = (view as? SKView)?.scene as? GameScene else { return }
+        gameScene.windowWillClose()
     }
     
 }

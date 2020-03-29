@@ -11,6 +11,6 @@ import Cocoa
 struct APIGameSummary: Codable {
     
     var game: APIGame
-    let currentPlayer: APIPlayer
+    var currentPlayer: APIPlayer?
     
 }

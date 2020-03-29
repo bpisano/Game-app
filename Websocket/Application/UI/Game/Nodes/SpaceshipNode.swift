@@ -10,7 +10,7 @@ import SpriteKit
 
 final class SpaceshipNode: SKSpriteNode {
     
-    var apiSpaceship: APISpaceship
+    weak var apiSpaceship: APISpaceship?
     
     init(apiSpaceship: APISpaceship) {
         self.apiSpaceship = apiSpaceship
@@ -23,6 +23,7 @@ final class SpaceshipNode: SKSpriteNode {
     }
     
     private func configure() {
+        guard let apiSpaceship = apiSpaceship else { return }
         name = "spaceship"
         position = apiSpaceship.position
         physicsBody = Physics.Body.spaceship.physicBody(from: self)
