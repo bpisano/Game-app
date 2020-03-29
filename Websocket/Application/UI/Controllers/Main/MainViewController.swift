@@ -12,6 +12,8 @@ import GameplayKit
 import SocketIO
 
 final class MainViewController: NSViewController {
+    
+    @IBOutlet private weak var skView: SKView!
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,35 +29,30 @@ final class MainViewController: NSViewController {
     }
     
     private func presentMenuScene() {
-        guard let view = view as? SKView else { fatalError() }
-        
         let menuScene = MenuScene(onJoinGameTouch: { [weak self] in
             self?.showJoinGameController()
         }, onCreateGameTouch: { [weak self] in
             self?.showCreateGameController()
         })
         
-        view.ignoresSiblingOrder = true
-        view.showsFPS = true
-        view.showsNodeCount = true
-        view.showsPhysics = true
+        skView.ignoresSiblingOrder = true
+        skView.showsFPS = true
+        skView.showsNodeCount = true
+        skView.showsPhysics = true
         
-        view.presentScene(menuScene)
+        skView.presentScene(menuScene)
     }
     
     private func goToGameScene(gameSummary: APIGameSummary) {
-        guard let view = view as? SKView else { return }
         let gameManager: GameManager = GameManager(gameSummary: gameSummary)
         let gameScene: GameScene = GameScene(gameManager: gameManager)
         let transition: SKTransition = SKTransition.fade(with: .black, duration: 2)
-        view.presentScene(gameScene, transition: transition)
+        skView.presentScene(gameScene, transition: transition)
     }
     
     private func configureMouseEvents() {
-        guard let view = view as? SKView else { fatalError() }
-        
-        view.window?.acceptsMouseMovedEvents = true
-        view.window?.makeFirstResponder(view.scene)
+        skView.window?.acceptsMouseMovedEvents = true
+        skView.window?.makeFirstResponder(skView.scene)
     }
         
     private func showCreateGameController() {

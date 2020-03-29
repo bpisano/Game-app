@@ -10,17 +10,17 @@ import Cocoa
 
 class APISpaceship: Codable, Hashable {
 
-    weak var player: APIPlayer?
+    let player: APIPlayer
     var health: CGFloat
     var position: CGPoint
     var rotation: CGFloat
     
     static func == (lhs: APISpaceship, rhs: APISpaceship) -> Bool {
-        return lhs.player?.id == rhs.player?.id
+        return lhs.player.id == rhs.player.id
     }
     
     func hash(into hasher: inout Hasher) {
-        hasher.combine(player?.id)
+        hasher.combine(player.id)
     }
     
     static func fromJsonString(_ jsonString: String) -> APISpaceship? {

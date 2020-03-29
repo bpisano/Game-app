@@ -8,7 +8,7 @@
 
 import Cocoa
 
-protocol GameManagerDelegate {
+protocol GameManagerDelegate: class {
     
     func spaceshipDidConnect(apiSpaceship: APISpaceship, gameManager: GameManager)
     func spaceshipDidDisconnect(apiSpaceship: APISpaceship, gameManager: GameManager)

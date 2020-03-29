@@ -13,12 +13,12 @@ final class GameScene: SKScene {
     
     static let size: CGSize = CGSize(width: 1200, height: 1200)
     
-    private let gameManager: GameManager
+    private var gameManager: GameManager?
     private var gameCamera: GameCamera?
     private var mousePosition: CGPoint = .zero
     private var spaceships: Set<SpaceshipNode> = []
     private var currentPlayerSpaceship: SpaceshipNode? {
-        return spaceships.first(where: { $0.apiSpaceship?.player?.id == gameManager.gameSummary.currentPlayer.id })
+        return spaceships.first(where: { $0.apiSpaceship?.player.id == gameManager?.gameSummary?.currentPlayer?.id })
     }
     private var canControlSpaceship: Bool = true
         
@@ -34,8 +34,8 @@ final class GameScene: SKScene {
     }
     
     private func configureGameManager() {
-        gameManager.delegate = self
-        gameManager.launchGame()
+        gameManager?.delegate = self
+        gameManager?.launchGame()
     }
     
     private func configureUI() {
@@ -76,7 +76,7 @@ final class GameScene: SKScene {
     }
     
     private func addNewSpaceshipNode(fromApiSpaceship apiSpaceship: APISpaceship) {
-        guard spaceships.first(where: { $0.apiSpaceship?.player?.id == apiSpaceship.player?.id }) == nil else { return }
+        guard spaceships.first(where: { $0.apiSpaceship?.player.id == apiSpaceship.player.id }) == nil else { return }
         let newSpaceship: SpaceshipNode = SpaceshipNode(apiSpaceship: apiSpaceship)
         spaceships.insert(newSpaceship)
         addChild(newSpaceship)
@@ -94,7 +94,12 @@ extension GameScene {
             spaceships.remove(spaceship)
         }
         
-        gameManager.stopGame()
+        gameCamera?.removeFromParent()
+        gameCamera = nil
+        camera = nil
+        
+        gameManager?.stopGame()
+        gameManager = nil
     }
     
 }
@@ -108,24 +113,24 @@ extension GameScene {
         spaceships.insert(newSpaceship)
         addChild(newSpaceship)
         
-        if apiSpaceship.player?.id == gameManager.gameSummary.currentPlayer.id {
+        if apiSpaceship.player.id == gameManager?.gameSummary?.currentPlayer?.id {
             gameCamera?.nodeToFollow = newSpaceship
         }
     }
     
     private func handleSpaceshipDidUpdatePosition(apiSpaceship: APISpaceship) {
-        guard let playerSpaceship = spaceships.first(where: { $0.apiSpaceship?.player?.id == apiSpaceship.player?.id }) else { return }
+        guard let playerSpaceship = spaceships.first(where: { $0.apiSpaceship?.player.id == apiSpaceship.player.id }) else { return }
         playerSpaceship.position = apiSpaceship.position
         playerSpaceship.zRotation = apiSpaceship.rotation
     }
     
     private func handleSpaceshipDidFire(apiSpaceship: APISpaceship) {
-        guard let playerSpaceship = spaceships.first(where: { $0.apiSpaceship?.player?.id == apiSpaceship.player?.id }) else { return }
+        guard let playerSpaceship = spaceships.first(where: { $0.apiSpaceship?.player.id == apiSpaceship.player.id }) else { return }
         playerSpaceship.fire(in: self)
     }
     
     private func handleSpaceshipBeingHit(apiSpaceship: APISpaceship) {
-        guard let playerSpaceship = spaceships.first(where: { $0.apiSpaceship?.player?.id == apiSpaceship.player?.id }) else { return }
+        guard let playerSpaceship = spaceships.first(where: { $0.apiSpaceship?.player.id == apiSpaceship.player.id }) else { return }
         playerSpaceship.hit()
     }
     
@@ -149,7 +154,7 @@ extension GameScene {
     
     override func keyDown(with event: NSEvent) {
         if event.charactersIgnoringModifiers == " " {
-            gameManager.currentPlayerDidFire()
+            gameManager?.currentPlayerDidFire()
         } else if event.charactersIgnoringModifiers == "q" {
             currentPlayerSpaceship?.position = .zero
             currentPlayerSpaceship?.physicsBody?.velocity = .zero
@@ -176,7 +181,7 @@ extension GameScene {
         }
         
         if let currentPlayerSpaceship = currentPlayerSpaceship {
-            gameManager.currentPlayerDidUpdateSpaceshipPosition(position: currentPlayerSpaceship.position, rotation: currentPlayerSpaceship.zRotation)
+            gameManager?.currentPlayerDidUpdateSpaceshipPosition(position: currentPlayerSpaceship.position, rotation: currentPlayerSpaceship.zRotation)
         }
         
         gameCamera?.update()
@@ -199,11 +204,11 @@ extension GameScene: SKPhysicsContactDelegate {
         let fireNode: FireNode = nodeA.name == "fire" ? nodeA as! FireNode : nodeB as! FireNode
         let spaceship: SpaceshipNode = nodeA.name == "fire" ? nodeB as! SpaceshipNode : nodeA as! SpaceshipNode
         
-        if fireNode.spaceship?.apiSpaceship?.player?.id != spaceship.apiSpaceship?.player?.id {
+        if fireNode.spaceship?.apiSpaceship?.player.id != spaceship.apiSpaceship?.player.id {
             fireNode.removeFromParent()
             
-            if let playerId = spaceship.apiSpaceship?.player?.id, playerId != gameManager.gameSummary.currentPlayer.id {
-                gameManager.currentPlayerDidHit(playerId: playerId, damage: 10)
+            if let playerId = spaceship.apiSpaceship?.player.id, playerId != gameManager?.gameSummary?.currentPlayer?.id {
+                gameManager?.currentPlayerDidHit(playerId: playerId, damage: 10)
             }
         }
     }
@@ -216,41 +221,41 @@ extension GameScene: GameManagerDelegate {
     
     func spaceshipDidConnect(apiSpaceship: APISpaceship, gameManager: GameManager) {
         addNewSpaceshipNode(fromApiSpaceship: apiSpaceship)
-        if apiSpaceship.player?.id == gameManager.gameSummary.currentPlayer.id {
+        if apiSpaceship.player.id == gameManager.gameSummary?.currentPlayer?.id {
             gameCamera?.nodeToFollow = currentPlayerSpaceship
         }
     }
     
     func spaceshipDidDisconnect(apiSpaceship: APISpaceship, gameManager: GameManager) {
-        guard let playerSpaceship = spaceships.first(where: { $0.apiSpaceship?.player?.id == apiSpaceship.player?.id }) else { return }
+        guard let playerSpaceship = spaceships.first(where: { $0.apiSpaceship?.player.id == apiSpaceship.player.id }) else { return }
         playerSpaceship.removeFromParent()
         spaceships.remove(playerSpaceship)
     }
     
     func spaceshipDidUpdatePosition(apiSpaceship: APISpaceship, gameManager: GameManager) {
-        guard let playerSpaceship = spaceships.first(where: { $0.apiSpaceship?.player?.id == apiSpaceship.player?.id }) else { return }
+        guard let playerSpaceship = spaceships.first(where: { $0.apiSpaceship?.player.id == apiSpaceship.player.id }) else { return }
         playerSpaceship.position = apiSpaceship.position
         playerSpaceship.zRotation = apiSpaceship.rotation
     }
     
     func spaceshipDidFire(apiSpaceship: APISpaceship, gameManager: GameManager) {
-        guard let playerSpaceship = spaceships.first(where: { $0.apiSpaceship?.player?.id == apiSpaceship.player?.id }) else { return }
+        guard let playerSpaceship = spaceships.first(where: { $0.apiSpaceship?.player.id == apiSpaceship.player.id }) else { return }
         playerSpaceship.fire(in: self)
     }
     
     func spaceshipHasBeenHit(apiSpaceship: APISpaceship, gameManager: GameManager) {
-        guard let playerSpaceship = spaceships.first(where: { $0.apiSpaceship?.player?.id == apiSpaceship.player?.id }) else { return }
+        guard let playerSpaceship = spaceships.first(where: { $0.apiSpaceship?.player.id == apiSpaceship.player.id }) else { return }
         playerSpaceship.hit()
     }
     
     func spaceshipHasBeenKilled(apiSpaceship: APISpaceship, gameManager: GameManager) {
-        guard let playerSpaceship = spaceships.first(where: { $0.apiSpaceship?.player?.id == apiSpaceship.player?.id }) else { return }
+        guard let playerSpaceship = spaceships.first(where: { $0.apiSpaceship?.player.id == apiSpaceship.player.id }) else { return }
         
         playerSpaceship.kill { [weak self] in
             self?.spaceships.remove(playerSpaceship)
         }
         
-        if apiSpaceship.player?.id == gameManager.gameSummary.currentPlayer.id {
+        if apiSpaceship.player.id == gameManager.gameSummary?.currentPlayer?.id {
             gameCamera?.nodeToFollow = nil
         }
     }
@@ -267,11 +272,11 @@ extension GameScene: GameManagerDelegate {
     func spaceshipDidRespawn(apiSpaceship: APISpaceship, gameManager: GameManager) {
         addNewSpaceshipNode(fromApiSpaceship: apiSpaceship)
         
-        if apiSpaceship.player?.id == gameManager.gameSummary.currentPlayer.id {
+        if apiSpaceship.player.id == gameManager.gameSummary?.currentPlayer?.id {
             gameCamera?.nodeToFollow = currentPlayerSpaceship
         }
         
-        if apiSpaceship.player?.id == gameManager.gameSummary.currentPlayer.id {
+        if apiSpaceship.player.id == gameManager.gameSummary?.currentPlayer?.id {
             gameCamera?.alertNode = nil
         }
     }
