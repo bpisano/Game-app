@@ -57,43 +57,43 @@ final class GameManager {
         
         socketManager.on(event: .spaceshipDidDisconnect(playerId: "")) { [weak self] (data) in
             guard let fetchedPlayerId = data[0] as? String else { return }
-            guard let apiSpaceship = self?.gameSummary.game.spaceships.first(where: { $0.player.id == fetchedPlayerId }) else { return }
+            guard let apiSpaceship = self?.gameSummary.game.spaceships.first(where: { $0.player?.id == fetchedPlayerId }) else { return }
             self?.handleSpaceshipDidDisconnect(apiSpaceship: apiSpaceship)
         }
         
         socketManager.on(event: .spaceshipDidUpdatePosition(playerId: "", position: .zero, rotation: 0)) { [weak self] (data) in
             guard let fetchedPlayerId = data[0] as? String, let xPosition = data[1] as? Double, let yPosition = data[2] as? Double, let fetchedRotation = data[3] as? Double else { return }
-            guard let apiSpaceship = self?.gameSummary.game.spaceships.first(where: { $0.player.id == fetchedPlayerId }) else { return }
+            guard let apiSpaceship = self?.gameSummary.game.spaceships.first(where: { $0.player?.id == fetchedPlayerId }) else { return }
             self?.handleSpaceshipDidUpdatePosition(apiSpaceship: apiSpaceship, position: CGPoint(x: xPosition, y: yPosition), rotation: CGFloat(fetchedRotation))
         }
         
         socketManager.on(event: .spaceshipDidFire(playerId: "")) { [weak self] (data) in
             guard let fetchedPlayerId = data[0] as? String else { return }
-            guard let apiSpaceship = self?.gameSummary.game.spaceships.first(where: { $0.player.id == fetchedPlayerId }) else { return }
+            guard let apiSpaceship = self?.gameSummary.game.spaceships.first(where: { $0.player?.id == fetchedPlayerId }) else { return }
             self?.handleSpaceshipDidFire(apiSpaceship: apiSpaceship)
         }
         
         socketManager.on(event: .spaceshipHasBeenHit(playerId: "", damage: 0)) { [weak self] (data) in
             guard let fetchedPlayerId = data[0] as? String, let damage = data[1] as? Int else { return }
-            guard let apiSpaceship = self?.gameSummary.game.spaceships.first(where: { $0.player.id == fetchedPlayerId }) else { return }
+            guard let apiSpaceship = self?.gameSummary.game.spaceships.first(where: { $0.player?.id == fetchedPlayerId }) else { return }
             self?.handleSpaceshipBeingHit(apiSpaceship: apiSpaceship, damage: damage)
         }
         
         socketManager.on(event: .spaceshipHasBeenKilled) { [weak self] (data) in
             guard let fetchedPlayerId = data[0] as? String else { return }
-            guard let apiSpaceship = self?.gameSummary.game.spaceships.first(where: { $0.player.id == fetchedPlayerId }) else { return }
+            guard let apiSpaceship = self?.gameSummary.game.spaceships.first(where: { $0.player?.id == fetchedPlayerId }) else { return }
             self?.handleSpaceshipHasBeenKilled(apiSpaceship: apiSpaceship)
         }
         
         socketManager.on(event: .spaceshipTimerBeforeRespawn) { [weak self] (data) in
             guard let fetchedPlayerId = data[0] as? String, let timer = data[1] as? Int else { return }
-            guard let apiSpaceship = self?.gameSummary.game.spaceships.first(where: { $0.player.id == fetchedPlayerId }) else { return }
+            guard let apiSpaceship = self?.gameSummary.game.spaceships.first(where: { $0.player?.id == fetchedPlayerId }) else { return }
             self?.handleSpaceshipTimerBeforeRespawn(apiSpaceship: apiSpaceship, timer: timer)
         }
         
         socketManager.on(event: .spaceshipDidRespawn) { [weak self] (data) in
             guard let fetchedPlayerId = data[0] as? String, let xPosition = data[1] as? Double, let yPosition = data[2] as? Double, let health = data[3] as? Double else { return }
-            guard let apiSpaceship = self?.gameSummary.game.spaceships.first(where: { $0.player.id == fetchedPlayerId }) else { return }
+            guard let apiSpaceship = self?.gameSummary.game.spaceships.first(where: { $0.player?.id == fetchedPlayerId }) else { return }
             self?.handleSpaceshipDidRespawn(apiSpaceship: apiSpaceship, position: CGPoint(x: xPosition, y: yPosition), health: CGFloat(health))
         }
     }
@@ -110,16 +110,17 @@ extension GameManager {
     }
     
     private func handleSpaceshipDidDisconnect(apiSpaceship: APISpaceship) {
+        guard let player = apiSpaceship.player else { return }
         delegate?.spaceshipDidDisconnect(apiSpaceship: apiSpaceship, gameManager: self)
         gameSummary.game.spaceships.remove(apiSpaceship)
-        gameSummary.game.players.remove(apiSpaceship.player)
+        gameSummary.game.players.remove(player)
     }
     
     private func handleSpaceshipDidUpdatePosition(apiSpaceship: APISpaceship, position: CGPoint, rotation: CGFloat) {
         apiSpaceship.position = position
         apiSpaceship.rotation = rotation
         
-        if apiSpaceship.player.id != gameSummary.currentPlayer.id {
+        if apiSpaceship.player?.id != gameSummary.currentPlayer.id {
             delegate?.spaceshipDidUpdatePosition(apiSpaceship: apiSpaceship, gameManager: self)
         }
     }
@@ -138,7 +139,7 @@ extension GameManager {
     }
     
     private func handleSpaceshipTimerBeforeRespawn(apiSpaceship: APISpaceship, timer: Int) {
-        guard apiSpaceship.player.id == gameSummary.currentPlayer.id else { return }
+        guard apiSpaceship.player?.id == gameSummary.currentPlayer.id else { return }
         delegate?.spaceshipTimerBeforeRespawn(apiSpaceship: apiSpaceship, timer: timer, gameManager: self)
     }
     

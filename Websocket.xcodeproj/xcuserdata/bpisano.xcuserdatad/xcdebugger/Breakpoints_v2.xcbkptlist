@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "481E162F-2A9D-4F71-A7A6-C99E46F5ABEC"
+            uuid = "3F47C2D1-FB3A-493F-BA03-534B4783F50F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Websocket/Application/Models/Sockets/GameSocketManger.swift"
+            filePath = "Websocket/Application/UI/Game/GameScene.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
-            landmarkName = "disconnect()"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "windowWillClose()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
